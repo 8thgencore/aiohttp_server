@@ -1,5 +1,6 @@
 from aiohttp import web
 
+
 class PostgresAccessor:
     def __init__(self) -> None:
         from app.forum.models import Message

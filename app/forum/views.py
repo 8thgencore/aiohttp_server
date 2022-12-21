@@ -9,7 +9,7 @@ from app.forum.models import Message
 # создаем функцию, которая будет отдавать html-файл
 @aiohttp_jinja2.template("index.html")
 async def index(request):
-   return {'title': 'Пишем первое приложение на aiohttp'}
+    return {"title": "Пишем первое приложение на aiohttp"}
 
 
 class ListMessageView(web.View):
@@ -17,32 +17,30 @@ class ListMessageView(web.View):
         messages = await Message.query.order_by(Message.id.desc()).gino.all()
         messages_data = []
         for message in messages:
-            messages_data.append({
-                "id": message.id,
-                "text": message.text,
-                "created": str(message.created),
-            })
+            messages_data.append(
+                {
+                    "id": message.id,
+                    "text": message.text,
+                    "created": str(message.created),
+                }
+            )
 
-        return web.json_response(data={'messages': messages_data})
+        return web.json_response(data={"messages": messages_data})
 
 
 class CreateMessageView(web.View):
     async def post(self):
         data = await self.request.json()
         message = await self.request.app["db"].message.create(
-            text=data['text'],
+            text=data["text"],
             created=datetime.now(),
         )
         return web.json_response(
             data={
-                'message': {
-                    'id': message.id,
-                    'text': message.text,
-                    'created': str(message.created),
+                "message": {
+                    "id": message.id,
+                    "text": message.text,
+                    "created": str(message.created),
                 },
             },
         )
-
-
-
-

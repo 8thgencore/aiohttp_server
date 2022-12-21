@@ -1,5 +1,6 @@
 from app.store.database.models import db
 
+
 class Message(db.Model):
     __tablename__ = "message"
 

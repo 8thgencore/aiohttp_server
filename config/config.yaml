@@ -1,5 +1,5 @@
 common:  
-  port:  
-postgres:   
-  database_url:    
+  port: 8200
+postgres:
+  database_url: postgres://postgres:postgres@db:5432/db
   require_ssl: true
